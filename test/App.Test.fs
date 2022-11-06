@@ -12,7 +12,7 @@ module Test =
         new System.Uri(path)
     
     let ``Tag file tests`` =
-        testList "A file was tagged" [
+        testSequenced <| testList "A file was tagged" [
 
             test "with one tag" {
                 App.tags.Clear()
@@ -49,7 +49,7 @@ module Test =
         ]
 
     let ``Filter tests`` =
-        testList "Tags were filtered" [
+        testSequenced <| testList "Tags were filtered" [
 
             test "by their name" {
                 App.tags.Clear()
