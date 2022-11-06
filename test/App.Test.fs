@@ -2,7 +2,11 @@
 
 module Test =
 
+    #if FABLE_COMPILER
     open Fable.Mocha
+    #else
+    open Expecto
+    #endif
 
     let uri path =
         new System.Uri(path)
@@ -61,5 +65,13 @@ module Test =
             }
         ]
 
-    Mocha.runTests ``Tag file tests``
-    Mocha.runTests ``Filter tests``
+    [<EntryPoint>]
+    let main args =
+    #if FABLE_COMPILER
+        Mocha.runTests ``Tag file tests``
+        Mocha.runTests ``Filter tests``
+    #else
+        runTestsWithArgs defaultConfig args ``Tag file tests``
+        runTestsWithArgs defaultConfig args ``Filter tests``
+    #endif
+
