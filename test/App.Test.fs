@@ -3,6 +3,9 @@
 module Test =
 
     open Fable.Mocha
+
+    let uri path =
+        new System.Uri(path)
     
     let ``Tag file tests`` =
         testList "A file was tagged" [
