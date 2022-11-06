@@ -11,3 +11,6 @@ module App =
         tags
 
     let getAllTags = tags
+
+    let selectTags name tags = 
+        tags |> Seq.filter (fun x -> x.Name = name)

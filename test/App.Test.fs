@@ -43,5 +43,23 @@ module Test =
                 Expect.isTrue (App.getAllTags |> Seq.contains { Name = name3; File = file2 }) "then the correct fourth tag exists"
             }
         ]
-    
+
+    let ``Filter tests`` =
+        testList "Tags were filtered" [
+
+            test "by their name" {
+                App.tags.Clear()
+
+                App.tagFile (uri "C://my/file1.txt") "x" |> ignore
+                App.tagFile (uri "C://my/file2.txt") "-" |> ignore
+                App.tagFile (uri "C://my/file3.txt") "x" |> ignore
+                App.tagFile (uri "C://my/file4.txt") "x" |> ignore
+                App.tagFile (uri "C://my/file5.txt") "-" |> ignore
+
+                Expect.equal (App.getAllTags |> App.selectTags "x" |> Seq.length) 3 "so three tags should remain"
+                Expect.isTrue (App.getAllTags |> App.selectTags "x" |> Seq.map (fun x -> x.File) |> Seq.contains (uri "C://my/file1.txt")) "so file 1 should be in the filtered list"
+            }
+        ]
+
     Mocha.runTests ``Tag file tests``
+    Mocha.runTests ``Filter tests``
