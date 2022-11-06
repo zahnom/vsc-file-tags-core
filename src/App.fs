@@ -10,4 +10,4 @@ module App =
         tags.Add({ Name = tagName; File = uri })
         tags
 
-    let getTags = tags
+    let getAllTags = tags

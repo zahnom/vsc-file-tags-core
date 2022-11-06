@@ -15,8 +15,8 @@ module Test =
                     
                 App.tagFile file name |> ignore
 
-                Expect.equal App.getTags.Count 1 "then only one tag must exist"
-                Expect.equal App.getTags.[0] { Name = name; File = file } "then the added tag must exists"
+                Expect.equal App.getAllTags.Count 1 "then only one tag must exist"
+                Expect.equal App.getAllTags.[0] { Name = name; File = file } "then the added tag must exists"
             }
     
             test "with four unique tags" {
@@ -33,11 +33,11 @@ module Test =
                 App.tagFile file2 name2 |> ignore
                 App.tagFile file2 name3 |> ignore
 
-                Expect.equal App.getTags.Count 4 "then four tags must exist"
-                Expect.isTrue (App.getTags |> Seq.contains { Name = name1; File = file1 }) "then the correct first tag exists"
-                Expect.isTrue (App.getTags |> Seq.contains { Name = name2; File = file1 }) "then the correct second tag exists"
-                Expect.isTrue (App.getTags |> Seq.contains { Name = name2; File = file2 }) "then the correct third tag exists"
-                Expect.isTrue (App.getTags |> Seq.contains { Name = name3; File = file2 }) "then the correct fourth tag exists"
+                Expect.equal App.getAllTags.Count 4 "then four tags must exist"
+                Expect.isTrue (App.getAllTags |> Seq.contains { Name = name1; File = file1 }) "then the correct first tag exists"
+                Expect.isTrue (App.getAllTags |> Seq.contains { Name = name2; File = file1 }) "then the correct second tag exists"
+                Expect.isTrue (App.getAllTags |> Seq.contains { Name = name2; File = file2 }) "then the correct third tag exists"
+                Expect.isTrue (App.getAllTags |> Seq.contains { Name = name3; File = file2 }) "then the correct fourth tag exists"
             }
         ]
     
