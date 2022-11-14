@@ -61,7 +61,11 @@ module Test =
                 App.tagFile (uri "C://my/file5.txt") "-" |> ignore
 
                 Expect.equal (App.getAllTags |> App.selectTags "x" |> Seq.length) 3 "so three tags should remain"
-                Expect.isTrue (App.getAllTags |> App.selectTags "x" |> Seq.map (fun x -> x.File) |> Seq.contains (uri "C://my/file1.txt")) "so file 1 should be in the filtered list"
+                Expect.isTrue (
+                    App.getAllTags
+                    |> App.selectTags "x"
+                    |> Seq.map (fun x -> x.File.AbsoluteUri)
+                    |> Seq.contains "c://my/file1.txt") "so file 1 should be in the filtered list"
             }
         ]
 
