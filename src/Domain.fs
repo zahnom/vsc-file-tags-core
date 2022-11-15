@@ -5,5 +5,5 @@ module Domain =
 
     type Tag = {
         Name: string;
-        File: System.Uri;
+        File: string;
     }

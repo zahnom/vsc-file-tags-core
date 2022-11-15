@@ -17,7 +17,7 @@ module Test =
             test "with one tag" {
                 App.tags.Clear()
         
-                let file = new System.Uri("C://my/file.txt")
+                let file = "my/file.txt"
                 let name = "a tag"
                     
                 App.tagFile file name |> ignore
@@ -29,8 +29,8 @@ module Test =
             test "with four unique tags" {
                 App.tags.Clear()
 
-                let file1 = new System.Uri("C://my/file1.txt") 
-                let file2 = new System.Uri("C://my/file2.txt")
+                let file1 = "my/file1.txt"
+                let file2 = "my/file2.txt"
                 let name1 = "a tag"
                 let name2 = "another tag" 
                 let name3 = "yet another tag"
@@ -54,18 +54,18 @@ module Test =
             test "by their name" {
                 App.tags.Clear()
 
-                App.tagFile (uri "C://my/file1.txt") "x" |> ignore
-                App.tagFile (uri "C://my/file2.txt") "-" |> ignore
-                App.tagFile (uri "C://my/file3.txt") "x" |> ignore
-                App.tagFile (uri "C://my/file4.txt") "x" |> ignore
-                App.tagFile (uri "C://my/file5.txt") "-" |> ignore
+                App.tagFile "my/file1.txt" "x" |> ignore
+                App.tagFile "my/file2.txt" "-" |> ignore
+                App.tagFile "my/file3.txt" "x" |> ignore
+                App.tagFile "my/file4.txt" "x" |> ignore
+                App.tagFile "my/file5.txt" "-" |> ignore
 
                 Expect.equal (App.getAllTags |> App.selectTags "x" |> Seq.length) 3 "so three tags should remain"
                 Expect.isTrue (
                     App.getAllTags
                     |> App.selectTags "x"
-                    |> Seq.map (fun x -> x.File.AbsoluteUri)
-                    |> Seq.contains "c://my/file1.txt") "so file 1 should be in the filtered list"
+                    |> Seq.map (fun x -> x.File)
+                    |> Seq.contains "my/file1.txt") "so file 1 should be in the filtered list"
             }
         ]
 

@@ -6,8 +6,8 @@ module App =
 
     let tags = new List<Tag>()
 
-    let tagFile uri tagName =
-        tags.Add({ Name = tagName; File = uri })
+    let tagFile path tagName =
+        tags.Add({ Name = tagName; File = path })
         tags
 
     let getAllTags = tags
